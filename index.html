@@ -1,1 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera with Overlay</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
 
+        #video-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the video covers the entire container */
+        }
+
+        #overlay {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: auto;
+            z-index: 1;
+            pointer-events: none; /* Ensures overlay is not interactive */
+        }
+    </style>
+</head>
+<body>
+    <div id="video-container">
+        <video id="camera" autoplay playsinline></video>
+        <img id="overlay" src="overlay.png" alt="Overlay Image">
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Camera Script -->
+    <script>
+        const video = document.getElementById('camera');
+
+        // Access the device camera and stream to video element
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+                video.srcObject = stream;
+                video.play();
+            }).catch(function(error) {
+                console.error('Error accessing the camera', error);
+            });
+        } else {
+            alert('Sorry, your browser does not support camera access.');
+        }
+    </script>
+</body>
+</html>
