@@ -42,7 +42,7 @@
 <body>
     <div id="video-container">
         <video id="camera" autoplay playsinline></video>
-        <img id="overlay" src="Untitled.png" alt="Overlay Image">
+        <img id="overlay" src="overlay.png" alt="Overlay Image">
     </div>
 
     <!-- Bootstrap JS and dependencies -->
@@ -56,7 +56,11 @@
 
         // Access the device camera and stream to video element
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+            navigator.mediaDevices.getUserMedia({
+                video: {
+                    facingMode: { exact: "environment" } // This requests the back camera
+                }
+            }).then(function(stream) {
                 video.srcObject = stream;
                 video.play();
             }).catch(function(error) {
