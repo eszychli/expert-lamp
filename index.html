@@ -29,19 +29,22 @@
             object-fit: cover;
         }
 
-        img#overlay-gif {
+        #overlay-container {
             position: absolute;
             bottom: 0;
             width: 100%;
+            height: auto;
             z-index: 1;
             pointer-events: none;
+            background: url('https://raw.githubusercontent.com/eszychli/expert-lamp/main/overlay.gif') no-repeat bottom center;
+            background-size: contain;
         }
     </style>
 </head>
 <body>
     <div id="video-container">
         <video id="camera" autoplay playsinline></video>
-        <img id="overlay-gif" src="https://raw.githubusercontent.com/eszychli/expert-lamp/main/overlay.gif" alt="GIF Overlay">
+        <div id="overlay-container"></div>
     </div>
 
     <!-- Bootstrap JS and dependencies -->
