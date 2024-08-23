@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camera with Video Overlay</title>
+    <title>Camera with GIF Overlay</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -29,7 +29,7 @@
             object-fit: cover;
         }
 
-        video#overlay-video {
+        img#overlay-gif {
             position: absolute;
             bottom: 0;
             width: 100%;
@@ -41,12 +41,7 @@
 <body>
     <div id="video-container">
         <video id="camera" autoplay playsinline></video>
-        <video id="overlay-video" width="600" height="100%" autoplay loop muted playsinline>
-            <source src="https://raw.githubusercontent.com/eszychli/expert-lamp/main/Untitled.mov" type='video/mp4; codecs="hvc1"'>
-            <source src="https://raw.githubusercontent.com/eszychli/expert-lamp/main/Untitled.webm" type="video/webm">
-            <source src="https://raw.githubusercontent.com/eszychli/expert-lamp/main/Untitled.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+        <img id="overlay-gif" src="overlay.gif" alt="GIF Overlay">
     </div>
 
     <!-- Bootstrap JS and dependencies -->
