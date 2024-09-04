@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camera with Overlay</title>
+    <title>Camera with Video Overlay</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -23,13 +23,13 @@
             background-color: #000;
         }
 
-        video {
+        video#camera {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        #overlay {
+        video#overlay-video {
             position: absolute;
             bottom: 0;
             width: 100%;
@@ -41,7 +41,10 @@
 <body>
     <div id="video-container">
         <video id="camera" autoplay playsinline></video>
-        <img id="overlay" src="https://raw.githubusercontent.com/eszychli/expert-lamp/main/Untitled.png" alt="Overlay Image">
+        <video id="overlay-video" autoplay loop muted playsinline>
+            <source src="https://esh20051.blob.core.windows.net/hezi/overlay-chrome.webm" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
     </div>
 
     <!-- Bootstrap JS and dependencies -->
@@ -81,11 +84,6 @@
 
         // Initialize the camera on load
         initCamera();
-
-        // Handle iOS overlay issues
-        document.getElementById('overlay').addEventListener('load', function() {
-            this.style.display = 'block'; // Ensure the overlay is visible after loading
-        });
     </script>
 </body>
 </html>
