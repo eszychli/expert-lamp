@@ -50,7 +50,7 @@
 <body>
     <div id="video-container">
         <video id="camera" autoplay playsinline></video>
-        <video id="overlay-video" autoplay loop playsinline>
+        <video id="overlay-video" loop playsinline>
             <source src="https://esh20051.blob.core.windows.net/hezi/overlay-movie.webm" type="video/webm">
             Your browser does not support the video tag.
         </video>
@@ -106,12 +106,21 @@
             }
         }
 
-        // Use requestAnimationFrame to ensure smooth rendering of the overlay video
-        function syncOverlay() {
-            requestAnimationFrame(syncOverlay);
+        // Wait for user interaction to play the overlay video with sound
+        function enableOverlayVideoPlayback() {
+            overlayVideo.play().catch(error => {
+                console.error('Error trying to play the overlay video with sound:', error);
+            });
         }
 
-        syncOverlay();  // Start syncing overlay
+        // Add an event listener for user interaction
+        window.addEventListener('click', () => {
+            enableOverlayVideoPlayback(); // Trigger video playback on user click
+        });
+
+        window.addEventListener('touchstart', () => {
+            enableOverlayVideoPlayback(); // Trigger video playback on touch event (for mobile devices)
+        });
 
         // Initialize the camera on load
         initCamera();
