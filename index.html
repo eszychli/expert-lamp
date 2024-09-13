@@ -31,17 +31,15 @@
             left: 0;
             transform: translateZ(0); /* Force separate layer */
             z-index: 1;
-            opacity: 0.9; /* Adding transparency to the camera feed */
         }
 
         video#overlay-video {
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 40%;
+            height: 50%;
             z-index: 2;
             pointer-events: none;
-            opacity: 0.8; /* Ensuring overlay is semi-transparent */
             transform: translateZ(0); /* Force separate layer */
             will-change: transform, opacity;
         }
