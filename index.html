@@ -45,6 +45,21 @@
             transform: translateZ(0); /* Force separate layer */
             will-change: transform, opacity;
         }
+
+        #touch-to-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -54,6 +69,7 @@
             <source src="https://esh20051.blob.core.windows.net/hezi/overlay-movie.webm" type="video/webm">
             Your browser does not support the video tag.
         </video>
+        <div id="touch-to-play">Touch to play</div>
     </div>
 
     <!-- Bootstrap JS and dependencies -->
@@ -65,15 +81,7 @@
     <script>
         const cameraVideo = document.getElementById('camera');
         const overlayVideo = document.getElementById('overlay-video');
-
-        // Log if the overlay video is loaded successfully
-        overlayVideo.addEventListener('loadeddata', () => {
-            console.log('Overlay video is loaded and ready to play');
-        });
-
-        overlayVideo.addEventListener('error', (e) => {
-            console.error('Error loading overlay video', e);
-        });
+        const touchToPlayText = document.getElementById('touch-to-play');
 
         // Function to initialize the camera
         async function initCamera() {
@@ -113,14 +121,20 @@
             });
         }
 
-        // Add an event listener for user interaction
-        window.addEventListener('click', () => {
-            enableOverlayVideoPlayback(); // Trigger video playback on user click
-        });
+        // Remove "Touch to Play" text once the user interacts with the page
+        function removeTouchToPlayText() {
+            touchToPlayText.style.display = 'none';
+        }
 
-        window.addEventListener('touchstart', () => {
-            enableOverlayVideoPlayback(); // Trigger video playback on touch event (for mobile devices)
-        });
+        // Handle user interaction and start video playback
+        function handleUserInteraction() {
+            enableOverlayVideoPlayback();
+            removeTouchToPlayText();
+        }
+
+        // Add event listeners for user interaction
+        window.addEventListener('click', handleUserInteraction);
+        window.addEventListener('touchstart', handleUserInteraction);
 
         // Initialize the camera on load
         initCamera();
